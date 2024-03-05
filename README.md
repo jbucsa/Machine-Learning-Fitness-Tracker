@@ -59,6 +59,17 @@ pip install jupyter-core
 pip install matplotlib
 ```
 
+## Data Collection
+
+Data was collection from 5 participants: A, B, C, D, and E. 
+
+Data was collection from 01/11/2019 (2019/01/11) to 01/16/2019 (2019/01/16)
+
+Equipment used was MbientLab's wristband sensor research kit
+- The wristband mimics the placement and orientation
+of a watch while allowing for controlled experiments. Data was collected using the
+default settings of the sensors: accelerometer: 12.500HZ and gyroscope: 25.000Hz.
+
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url-Bucsa]: https://www.linkedin.com/in/justin-bucsa
