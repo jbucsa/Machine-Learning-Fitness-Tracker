@@ -24,6 +24,40 @@ venv\Scripts\deactivate.bat
 
 ```
 
+## PIP Installs
+
+What was actually installed
+
+```bash
+pip install numpy
+pip install pandas
+pip install ipykernel==6.17.1 
+pip install ipython==8.7.0 
+pip install jupyter-client==7.4.7 
+pip install jupyter-core==5.1.0 
+pip install matplotlib==3.6.2
+```
+What was should be installed
+
+```bash
+pip install numpy==1.23.5 
+pip install pandas==1.5.2 
+pip install ipykernel==6.17.1 
+pip install ipython==8.7.0 
+pip install jupyter-client==7.4.7 
+pip install jupyter-core==5.1.0 
+pip install matplotlib==3.6.2
+```
+Installing Current Versions of ALL PIP files.
+```bash
+pip install numpy
+pip install pandas
+pip install ipykernel 
+pip install ipython
+pip install jupyter-client
+pip install jupyter-core
+pip install matplotlib
+```
 
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
