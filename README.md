@@ -8,6 +8,22 @@
 
 Create Python scripts to process, visualize, and model accelerometer and gyroscope data to create a machine learning model that can classify barbell exercises and count repetitions.
 
+## Terminal Commands
+
+Activating the VENV environment
+
+```bash
+venv\Scripts\activate.bat
+
+```
+
+Deactivating the VENV environment
+
+```bash
+venv\Scripts\deactivate.bat
+
+```
+
 
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
