@@ -195,7 +195,43 @@ def read_data_from_files (files):
 
 acc_df, gyr_df = read_data_from_files (files)
 
-    
+
+gyr_df.columns = [
+    "gyr_x",
+    "gyr_y",
+    "gyr_z",
+    "participant",
+    "label",
+    "category",
+    "set",
+]
+
+acc_df.columns = [
+    "acc_x",
+    "acc_y",
+    "acc_z",
+    "participant",
+    "label",
+    "category",
+    "set",
+]
+   
+merged_data_Complete2 = gyr_df.combine_first(acc_df)
+
+merged_data_Complete2.columns
+
+merged_data_Complete2.head(5000)
+
+Complete_Data_Set_Merged = merged_data_Complete2.reindex(["acc_x",
+    "acc_y",
+    "acc_z",
+    "gyr_x",
+    "gyr_y",
+    "gyr_z",
+    "participant",
+    "label",
+    "category",
+    "set"],axis=1 )
 
 """ 
 --------------------------------------------------------------
@@ -209,9 +245,14 @@ acc_df, gyr_df = read_data_from_files (files)
     If AXIS=0, the data would merge by ROWS
 """
 
+# Note if we need to correct the data, this is where this should happen. 
 
+""" 
+Tried this way and it is over complex for what we need. 
 
 data_merged_Acc_Lead = pd.concat([acc_df.iloc[:,:3], gyr_df], axis=1)
+data_merged_Acc_Lead.info()
+
 data_merged_Gyr_Lead = pd.concat([gyr_df.iloc[:,:3], acc_df], axis=1)
 
 
@@ -223,9 +264,9 @@ data_merge_cleaned_Acc.columns = [
     "gyr_x",
     "gyr_y",
     "gyr_z",
+    "participant",
     "label",
     "category",
-    "participant",
     "set",
 ]
 
@@ -238,17 +279,18 @@ data_merge_cleaned_Gyr.columns = [
     "gyr_x",
     "gyr_y",
     "gyr_z",
+    "participant",
     "label",
     "category",
-    "participant",
     "set",
 ]
 
 merged_data_Complete = data_merge_cleaned_Acc.combine_first(data_merge_cleaned_Gyr)
 
-merged_data_Complete.head(25000)
-
-
+merged_data_Complete.head(20650)
+ 
+merged_data_Complete.info()
+"""
 
 """
 This just drops rows that show any NaN values. This allows us to see how many rows share values with ACC and GYR. Remember, the GYR data was taken at a higher interval rate than the ACC data. 
@@ -265,8 +307,36 @@ This just drops rows that show any NaN values. This allows us to see how many ro
 # Accelerometer:    12.500HZ == 1/12.5 sec
 # Gyroscope:        25.000Hz == 1/25 sec
 
+sampling = {
+    'acc_x': 'mean',
+    'acc_y': 'mean',
+    'acc_z': 'mean',
+    'gyr_x': 'mean',
+    'gyr_y': 'mean',
+    'gyr_z': 'mean',
+    'label': 'last',
+    'category': 'last',
+    'participant': 'last',
+    'set': 'last'
+}
+
+merged_data_Complete.columns
+
+Complete_Data_Set_Merged[:1000].resample(rule="200ms").apply(sampling)
+
+# Split by Day
+days = [g for n, g in Complete_Data_Set_Merged.groupby(pd.Grouper(freq="D"))]
+
+data_resampled = pd.concat([df.resample(rule="200ms").apply(sampling).dropna() for df in days])
+
+data_resampled.info()
+
+data_resampled["set"] =  data_resampled["set"].astype("int")
+
 """
 --------------------------------------------------------------
     Export dataset
 --------------------------------------------------------------
 """
+
+data_resampled.to_pickle("../../data/interim/01_data_processed.pkl")
