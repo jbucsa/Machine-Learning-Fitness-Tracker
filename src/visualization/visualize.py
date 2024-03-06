@@ -21,6 +21,13 @@ df = pd.read_pickle("../../data/interim/01_data_processed.pkl")
 
 set_df = df[df["set"] ==1]
 
+plt.plot(set_df["acc_y"])
+""" 
+^^^ NOTE: That INDEX column is set at the X-AXIS by default. In this data set that means, EPOCH(MS) == X-AXIS VALUE if we use PLT.PLIT() command. 
+    NOTE: We did not have to use INDEX-COLUMN value to declare ACC_Y, we just had to stay the proper COLUMN-NAME
+"""
+
+ 
 
 """
 --------------------------------------------------------------
