@@ -222,16 +222,9 @@ merged_data_Complete2.columns
 
 merged_data_Complete2.head(5000)
 
-Complete_Data_Set_Merged = merged_data_Complete2.reindex(["acc_x",
-    "acc_y",
-    "acc_z",
-    "gyr_x",
-    "gyr_y",
-    "gyr_z",
-    "participant",
-    "label",
-    "category",
-    "set"],axis=1 )
+Complete_Data_Set_Merged = merged_data_Complete2.reindex(columns=["acc_x", "acc_y","acc_z", "gyr_x", "gyr_y", "gyr_z", "participant", "label", "category", "set"] )
+
+merged_data_Complete2.columns
 
 """ 
 --------------------------------------------------------------
@@ -320,7 +313,7 @@ sampling = {
     'set': 'last'
 }
 
-merged_data_Complete.columns
+#merged_data_Complete.columns
 
 Complete_Data_Set_Merged[:1000].resample(rule="200ms").apply(sampling)
 
@@ -333,10 +326,12 @@ data_resampled.info()
 
 data_resampled["set"] =  data_resampled["set"].astype("int")
 
+data_resampled_Completed = data_resampled.reindex(columns=["acc_x", "acc_y","acc_z", "gyr_x", "gyr_y", "gyr_z", "participant", "label", "category", "set"])
+
 """
 --------------------------------------------------------------
     Export dataset
 --------------------------------------------------------------
 """
 
-data_resampled.to_pickle("../../data/interim/01_data_processed.pkl")
+data_resampled_Completed.to_pickle("../../data/interim/01_data_processed.pkl")

@@ -13,6 +13,8 @@ Create Python scripts to process, visualize, and model accelerometer and gyrosco
 Activating the VENV environment
 
 ```bash
+py -m venv venv
+
 venv\Scripts\activate.bat
 
 ```
@@ -35,7 +37,8 @@ pip install ipykernel==6.17.1
 pip install ipython==8.7.0 
 pip install jupyter-client==7.4.7 
 pip install jupyter-core==5.1.0 
-pip install matplotlib==3.6.2
+pip install matplotlib
+
 ```
 What was should be installed
 
