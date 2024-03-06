@@ -94,3 +94,5 @@ target/
 .venv
 *.venv/
 *.venv
+venv/
+venv
