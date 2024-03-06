@@ -90,6 +90,7 @@ for x in filesCSV:
 accelerometer_df[accelerometer_df["set"] == 35]
 
 """  
+    COMMENTED_OUT_CODE:
     for f_CVS in filesCSV:
         participant = f_CVS.split("-")[0].replace(data_path, "")
         label = f_CVS.split("-")[1]
@@ -109,6 +110,7 @@ accelerometer_df.info()
 pd.to_datetime(df["epoch (ms)"], unit="ms")
 
 """ 
+    NOTE:
     Conversion for normal time. Note, units not needed. 
     pd.to_datetime(df["time (01:00)"]).dt.month
     Note here, we are reassigning the index (KEY) values from a basic interger to a time value. Note, we have a Column (VALUE) that shares the same label name.
@@ -117,8 +119,9 @@ accelerometer_df.index = pd.to_datetime(accelerometer_df["epoch (ms)"], unit="ms
 gyroscope_df.index = pd.to_datetime(gyroscope_df["epoch (ms)"], unit="ms")
 
 """ 
+    NOTE:
     DELETING unnecessary columns from Dataframes
-    Note: We are deleting the COLUMN "epoch (ms)" (VALUE), not the Index Column (KEY)
+    We are deleting the COLUMN "epoch (ms)" (VALUE), not the Index Column (KEY)
 """
 del accelerometer_df["epoch (ms)"]
 del accelerometer_df["time (01:00)"]
@@ -140,7 +143,8 @@ del gyroscope_df["elapsed (s)"]
 # Note this focus on the CSV files, changes will be made to reflect what file is used. 
 
 """ 
-    Note, I changed the following variables to easy code
+    NOTE: I changed the following variables to easy code
+    COMMENTED_OUT_CODE:
         filesCSV => files
         accelerometer_df => acc_df
         gyroscope_df => gyr_df
@@ -233,6 +237,7 @@ merged_data_Complete2.columns
  """
 
 """ 
+    NOTE:
     .iloc is used to select columns when merging data. So same columns to avoid redundent columns
     Note when AXIS=1, the data is merge by COLUMNS.
     If AXIS=0, the data would merge by ROWS
@@ -241,8 +246,8 @@ merged_data_Complete2.columns
 # Note if we need to correct the data, this is where this should happen. 
 
 """ 
-Tried this way and it is over complex for what we need. 
-
+    NOTE: Tried this way and it is over complex for what we need. 
+    COMMENTED_OUT_CODE:
 data_merged_Acc_Lead = pd.concat([acc_df.iloc[:,:3], gyr_df], axis=1)
 data_merged_Acc_Lead.info()
 
@@ -286,7 +291,7 @@ merged_data_Complete.info()
 """
 
 """
-This just drops rows that show any NaN values. This allows us to see how many rows share values with ACC and GYR. Remember, the GYR data was taken at a higher interval rate than the ACC data. 
+    NOTE: This just drops rows that show any NaN values. This allows us to see how many rows share values with ACC and GYR. Remember, the GYR data was taken at a higher interval rate than the ACC data. 
     data_merged.dropna()
 """
 
