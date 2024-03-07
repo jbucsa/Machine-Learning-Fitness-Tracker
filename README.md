@@ -73,6 +73,11 @@ Equipment used was MbientLab's wristband sensor research kit
 of a watch while allowing for controlled experiments. Data was collected using the
 default settings of the sensors: accelerometer: 12.500HZ and gyroscope: 25.000Hz.
 
+## Understanding the data
+
+Acc_Y 
+- This is accerlation in the verticle direction, North to South.
+
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url-Bucsa]: https://www.linkedin.com/in/justin-bucsa
