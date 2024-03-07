@@ -76,8 +76,13 @@ default settings of the sensors: accelerometer: 12.500HZ and gyroscope: 25.000Hz
 ## Understanding the data
 
 Acc_Y 
-- This is accerlation in the verticle direction, North to South.
+- This is accerlation in the verticle direction, Up and Down.
 
+Acc_x 
+- This is accerlation in the horizontal direction, Left to Right (West to East).
+
+Acc_z 
+- This is accerlation in the horizontal direction, Front to Back (North to South).
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url-Bucsa]: https://www.linkedin.com/in/justin-bucsa
