@@ -29,7 +29,7 @@ venv\Scripts\deactivate.bat
 ## PIP Installs
 
 What was actually installed
-
+     
 ```bash
 pip install numpy
 pip install pandas
@@ -38,10 +38,13 @@ pip install ipython==8.7.0
 pip install jupyter-client==7.4.7 
 pip install jupyter-core==5.1.0 
 pip install matplotlib
-
+pip install math
+pip install spicy
+pip install scikit-learn-intelex
 ```
+  
 What was should be installed
-
+    
 ```bash
 pip install numpy==1.23.5 
 pip install pandas==1.5.2 
