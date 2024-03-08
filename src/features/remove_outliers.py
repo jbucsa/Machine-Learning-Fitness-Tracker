@@ -9,11 +9,17 @@ from sklearn.neighbors import LocalOutlierFactor  # pip install scikit-learn
 # Load data
 # --------------------------------------------------------------
 
+df = pd.read_pickle("../../data/interim/01_data_processed.pkl")
 
 # --------------------------------------------------------------
 # Plotting outliers
 # --------------------------------------------------------------
 
+plt.style.use("fivethirtyeight")
+plt.rcParams["figure.figsize"] = (20, 5)
+plt.rcParams["figure.dpi"]= 100
+
+df[["acc_x"]].boxplot()
 
 # --------------------------------------------------------------
 # Interquartile range (distribution based)
