@@ -134,7 +134,20 @@ dataset = mark_outliers_iqr(df, col)
 plot_binary_outliers(dataset=dataset, col=col, outlier_col=col+"_outlier", reset_index=True)
 
 
+
+
 # Loop over all columns
+
+""" 
+    NOTE: This is the same code.
+for x in outlier_columns:
+    dataset = mark_outliers_iqr(df, x)
+    plot_binary_outliers(dataset=dataset, col=x, outlier_col=x+"_outlier", reset_index=True)
+"""
+
+for col in outlier_columns:
+    dataset = mark_outliers_iqr(df, col)
+    plot_binary_outliers(dataset=dataset, col=col, outlier_col=col+"_outlier", reset_index=True)
 
 
 # --------------------------------------------------------------
