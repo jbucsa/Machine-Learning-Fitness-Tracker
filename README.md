@@ -44,7 +44,7 @@ $
 ### Deactivating the VENV environment
 
 
-For Command Prompt - cmd
+- For Command Prompt - cmd
 
 ```bash
 (venv) C:\Users\User\Machine-Learning-Fitness-Tracker> venv\Scripts\deactivate.bat
@@ -59,6 +59,9 @@ C:\Users\User\Machine-Learning-Fitness-Tracker>
 (venv) 
 User@User MINGW64 ~/Machine-Learning-Fitness-Tracker (main)
 $ deactivate
+
+User@User MINGW64 ~/Machine-Learning-Fitness-Tracker (main)
+$ 
 
 ``` 
 
