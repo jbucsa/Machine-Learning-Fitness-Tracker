@@ -10,21 +10,58 @@ Create Python scripts to process, visualize, and model accelerometer and gyrosco
 
 ## Terminal Commands
 
-Activating the VENV environment
+### Creating the VENV environment
 
 ```bash
 py -m venv venv
-
-venv\Scripts\activate.bat
-
 ```
 
-Deactivating the VENV environment
+    
+### Activating the VENV environment
+
+- For Command Prompt - cmd
+    
+```bash
+
+C:\Users\User\Machine-Learning-Fitness-Tracker> venv\Scripts\activate.bat
+
+(venv) C:\Users\User\Machine-Learning-Fitness-Tracker> 
+
+```
+   
+- For Git Bash - bash
+    
+```bash
+User@User MINGW64 ~/Machine-Learning-Fitness-Tracker (main)
+$ source venv/Scripts/activate
+
+(venv) 
+User@User MINGW64 ~/Machine-Learning-Fitness-Tracker (main)
+$ 
+
+``` 
+
+### Deactivating the VENV environment
+
+
+For Command Prompt - cmd
 
 ```bash
-venv\Scripts\deactivate.bat
+(venv) C:\Users\User\Machine-Learning-Fitness-Tracker> venv\Scripts\deactivate.bat
+
+C:\Users\User\Machine-Learning-Fitness-Tracker> 
 
 ```
+   
+- For Git Bash - bash
+    
+```bash
+(venv) 
+User@User MINGW64 ~/Machine-Learning-Fitness-Tracker (main)
+$ deactivate
+
+``` 
+
 
 ## PIP Installs
 
