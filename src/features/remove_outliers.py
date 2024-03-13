@@ -28,6 +28,7 @@ outlier_columns = list(df.columns[0:6])
 plt.style.use("fivethirtyeight")
 plt.rcParams["figure.figsize"] = (20, 5)
 plt.rcParams["figure.dpi"]= 100
+plt.rcParams["line.lineswidth"] = 2
 
 # First step is to get a visualization of what is seen
 df[["acc_x", "label"]].boxplot(by="label", figsize=(20,10))
