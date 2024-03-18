@@ -105,6 +105,7 @@ df_pca = df_lowpass.copy()
 PCA = PrincipalComponentAnalysis()
 pc_values = PCA.determine_pc_explained_variance(df_pca, predictor_columns)
     
+    
 # --------------------------------------------------------------
 # Sum of squares attributes
 # --------------------------------------------------------------
