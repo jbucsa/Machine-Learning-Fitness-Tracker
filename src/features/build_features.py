@@ -67,12 +67,43 @@ duration_df.iloc[1] / 10
 # Butterworth lowpass filter
 # --------------------------------------------------------------
 
+df_lowpass = df.copy()
+LowPass = LowPassFilter()
+
+fs = 1000/200
+# cutoff frequency
+cutoff = 1.45
+
+df_lowpass = LowPass.low_pass_filter(df_lowpass, "acc_y", fs, cutoff, order=5)
+
+subset = df_lowpass[df_lowpass["set"] == 45]
+print(subset["label"][0])
+
+#  Code for Data Visiulation
+fig, ax = plt.subplots(nrows=2, sharex=True, figsize=(20, 10))
+ax[0].plot(subset["acc_y"].reset_index(drop=True), label="raw data")
+ax[1].plot(subset["acc_y_lowpass"].reset_index(drop=True), label="butterworth filter")
+ax[0].legend(loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True)
+ax[1].legend(loc="upper center", bbox_to_anchor=(0.5, 1.15), fancybox=True, shadow=True)
+
+
+for col in predictor_columns:
+    # Here we add a col for the _lowpass values
+    df_lowpass = LowPass.low_pass_filter(df_lowpass, col, fs, cutoff, order=5)
+    # Here we override the inital columns with the values from the lowpass columns
+    df_lowpass[col] = df_lowpass [col + "_lowpass"]
+    # Here we delete the extreme _lowpass columns. 
+    del df_lowpass[col + "_lowpass"]    
+    
+
 
 # --------------------------------------------------------------
 # Principal component analysis PCA
 # --------------------------------------------------------------
 
 
+    
+    
 # --------------------------------------------------------------
 # Sum of squares attributes
 # --------------------------------------------------------------
