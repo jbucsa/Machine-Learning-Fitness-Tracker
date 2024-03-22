@@ -105,7 +105,14 @@ df_pca = df_lowpass.copy()
 PCA = PrincipalComponentAnalysis()
 pc_values = PCA.determine_pc_explained_variance(df_pca, predictor_columns)
     
-    
+
+plt.figure(figsize=(10,10))
+plt.plot(range(1, len(predictor_columns) +1), pc_values)
+plt.xlabel("principla component number")
+plt.ylabel("explained variance")
+plt.show()
+
+
 # --------------------------------------------------------------
 # Sum of squares attributes
 # --------------------------------------------------------------
