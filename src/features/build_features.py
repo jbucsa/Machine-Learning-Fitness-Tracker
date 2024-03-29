@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from DataTransformation import LowPassFilter, PrincipalComponentAnalysis
 from TemporalAbstraction import NumericalAbstraction
-
+from FrequencyAbstraction import FourierTransformation
 # --------------------------------------------------------------
 # Load data
 # --------------------------------------------------------------
@@ -164,12 +164,43 @@ for s in df_temporal["set"].unique():
     
 df_temporal = pd.concat(df_temporal_list)
      
+     
 subset[["acc_y", "acc_y_temp_mean_ws_5", "acc_y_temp_std_ws_5"]].plot()
 subset[["gyr_y", "gyr_y_temp_mean_ws_5", "gyr_y_temp_std_ws_5"]].plot()
 
 # --------------------------------------------------------------
 # Frequency features
 # --------------------------------------------------------------
+
+df_freq = df_temporal.copy().reset_index()
+
+FreqAbs = FourierTransformation()
+
+# the sampling rate expresses the number of samples per second (i.e. Frequency is Hertz of the dataset)
+fs = int(1000 / 200)
+ws = int(2800 / 200)
+
+df_freq = FreqAbs.abstract_frequency(df_freq, ["acc_y"], ws, fs)
+
+# Visualizing Results
+
+subset = df_freq[df_freq["set"] == 15]
+subset[["acc_y"]].plot()
+subset[['acc_y_max_freq', 'acc_y_freq_weighted', 'acc_y_pse',
+       'acc_y_freq_0.0_Hz_ws_14', 'acc_y_freq_0.357_Hz_ws_14',
+       'acc_y_freq_0.714_Hz_ws_14', 'acc_y_freq_1.071_Hz_ws_14',
+       'acc_y_freq_1.429_Hz_ws_14', 'acc_y_freq_1.786_Hz_ws_14',
+       'acc_y_freq_2.143_Hz_ws_14', 'acc_y_freq_2.5_Hz_ws_14',
+    ]].plot()
+
+df_freq_list = []
+for s in df_freq["set"].unique():
+    print(f"Applying Fourier Transformations to Set {s}")
+    subset = df_freq[df_freq["set"] == s].reset_index(drop=True).copy()
+    subset = FreqAbs.abstract_frequency(subset, predictor_columns, ws, fs)
+    df_freq_list.append(subset)
+    
+df_freq = pd.concat(df_freq_list).set_index("epoch (ms)", drop=True)
 
 
 # --------------------------------------------------------------
