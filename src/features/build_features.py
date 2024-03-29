@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from DataTransformation import LowPassFilter, PrincipalComponentAnalysis
 from TemporalAbstraction import NumericalAbstraction
 
-
 # --------------------------------------------------------------
 # Load data
 # --------------------------------------------------------------
@@ -12,7 +11,6 @@ from TemporalAbstraction import NumericalAbstraction
 df = pd.read_pickle("../../data/interim/02_outliers_removed_chauvenets.pkl")
 
 predictor_columns = list(df.columns[:6])
-
 
 #  Plot Settings
 plt.style.use("fivethirtyeight")
@@ -141,6 +139,33 @@ subset[["acc_r", "gyr_r"]].plot(subplots=True)
 # Temporal abstraction
 # --------------------------------------------------------------
 
+df_temporal = df_squared.copy()
+
+NumAbs = NumericalAbstraction()
+
+#  Use this as the DATA_TABLE variable in in NumericalAbstraction()
+predictor_columns = predictor_columns + ["acc_r", "gyr_r"]
+
+#  Use this as WINDOW_SIZE variable in NumericalAbstraction()
+# This is the space before the index. Note, that the window will start after your initial step. So a window size of 5 steps will skip the first 4 values, but use them to create the average for step 5. 
+ws = int(1000 /200)
+
+for col in predictor_columns:
+    df_temporal = NumAbs.abstract_numerical( df_temporal, [col], ws, "mean")
+    df_temporal = NumAbs.abstract_numerical( df_temporal, [col], ws, "std")
+
+df_temporal_list = []
+for s in df_temporal["set"].unique():
+    subset = df_temporal[df_temporal["set"] == s].copy()
+    for col in predictor_columns:
+        subset = NumAbs.abstract_numerical( subset, [col], ws, "mean")
+        subset = NumAbs.abstract_numerical( subset, [col], ws, "std")
+    df_temporal_list.append(subset)
+    
+df_temporal = pd.concat(df_temporal_list)
+     
+subset[["acc_y", "acc_y_temp_mean_ws_5", "acc_y_temp_std_ws_5"]].plot()
+subset[["gyr_y", "gyr_y_temp_mean_ws_5", "gyr_y_temp_std_ws_5"]].plot()
 
 # --------------------------------------------------------------
 # Frequency features
