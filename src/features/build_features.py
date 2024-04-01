@@ -229,7 +229,75 @@ df_freq = df_freq.iloc[::2]
 # Clustering
 # --------------------------------------------------------------
 
+# We will be preforming a K-means Clustering as a type of unsupervised machine learning algorithm to group data into a cluster dased on similarities. 
+
+df_cluster = df_freq.copy()
+
+cluster_columns = ["acc_x", "acc_y", "acc_z"]
+k_values = range(2, 10)
+inertias = []
+
+subset_Test = df_cluster[cluster_columns]
+
+for k in k_values:
+    subset = df_cluster[cluster_columns]
+    kmeans = KMeans( n_clusters=k, n_init=20, random_state=0)
+    cluster_labels = kmeans.fit_predict(subset)
+    inertias.append(kmeans.inertia_)
+
+plt.figure(figsize=(10, 10))
+plt.plot(k_values, inertias)
+plt.xlabel("k")
+plt.ylabel("Sum of Squared Distances")
+plt.show()
+
+# After plotting we see the elbow at k=4 or k=5. We will use k=5 as it is a lower and more dramatic elbow point
+kmeans = KMeans( n_clusters=5, n_init=20, random_state=0)
+subset = df_cluster[cluster_columns]
+df_cluster["cluster"] = kmeans.fit_predict(subset)
+
+
+# 3D Plot of the Clusters
+fig = plt.figure(figsize=(15, 15))
+ax = fig.add_subplot(projection="3d")
+for c in df_cluster["cluster"].unique():
+    subset = df_cluster[df_cluster["cluster"] == c]
+    ax.scatter(subset["acc_x"], subset["acc_y"], subset["acc_z"], label=c)
+ax.set_xlabel("X-Axis")
+ax.set_ylabel("Y-Axis")
+ax.set_zlabel("Z-Axis")
+plt.legend()
+plt.show()
+
+
+
+#  ACC Cluster in Exercises
+fig = plt.figure(figsize=(15, 15))
+ax = fig.add_subplot(projection="3d")
+for l in df_cluster["label"].unique():
+    subset = df_cluster[df_cluster["label"] == l]
+    ax.scatter(subset["acc_x"], subset["acc_y"], subset["acc_z"], label=l)
+ax.set_xlabel("X-Axis")
+ax.set_ylabel("Y-Axis")
+ax.set_zlabel("Z-Axis")
+plt.legend()
+plt.show()
+
+# GYR Cluster
+fig = plt.figure(figsize=(15, 15))
+ax = fig.add_subplot(projection="3d")
+for l in df_cluster["label"].unique():
+    subset = df_cluster[df_cluster["label"] == l]
+    ax.scatter(subset["gyr_x"], subset["gyr_y"], subset["gyr_z"], label=l)
+ax.set_xlabel("X-Axis")
+ax.set_ylabel("Y-Axis")
+ax.set_zlabel("Z-Axis")
+plt.legend()
+plt.show()
+
 
 # --------------------------------------------------------------
 # Export dataset
 # --------------------------------------------------------------
+
+df_cluster.to_pickle("../../data/interim/03_data_features.pkl")
