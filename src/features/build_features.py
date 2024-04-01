@@ -207,6 +207,7 @@ df_freq = pd.concat(df_freq_list).set_index("epoch (ms)", drop=True)
 # Dealing with overlapping windows
 # --------------------------------------------------------------
 
+df_freq = df_freq.dropna()
 
 # --------------------------------------------------------------
 # Clustering
