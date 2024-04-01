@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from DataTransformation import LowPassFilter, PrincipalComponentAnalysis
 from TemporalAbstraction import NumericalAbstraction
 from FrequencyAbstraction import FourierTransformation
+from sklearn.cluster import KMeans
+
 # --------------------------------------------------------------
 # Load data
 # --------------------------------------------------------------
@@ -208,6 +210,20 @@ df_freq = pd.concat(df_freq_list).set_index("epoch (ms)", drop=True)
 # --------------------------------------------------------------
 
 df_freq = df_freq.dropna()
+
+# ILOC looks for [ROWS, COLUMNS] snytax
+# .iloc[::2] this means we want every second row
+# .iloc[::4] this means we want every 4th row
+
+df_freq.iloc[:,:]
+
+
+# Reducing over fitting of the model. Now we want to limit the data. We are doing this because we have an amount of data that exceeds the needed parameters of what is need for a proper measurement/collection. 
+# This step is skip able if the amount of data collected is limited (ie. a small amount of data was collected), or if we want to show every single data point (high precision)
+# .iloc[::2] this means we want every second row
+df_freq.iloc[::2]
+
+df_freq = df_freq.iloc[::2]
 
 # --------------------------------------------------------------
 # Clustering
