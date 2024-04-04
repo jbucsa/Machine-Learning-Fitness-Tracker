@@ -14,10 +14,32 @@ plt.rcParams["figure.figsize"] = (20, 5)
 plt.rcParams["figure.dpi"] = 100
 plt.rcParams["lines.linewidth"] = 2
 
+# Import Data Frame
+
+df = pd.read_pickle("../../data/interim/03_data_features.pkl")
 
 # --------------------------------------------------------------
 # Create a training and test set
 # --------------------------------------------------------------
+
+# Drop the columns that hold data that will not be adding to the data for this step.
+
+df_train = df.drop(["participant", "category", "set", "duration"], axis=1) 
+
+X = df_train.drop("label", axis=1)
+y = df_train["label"]
+
+# Stratify=y allows use equally separate the data based on the labels. Without stratify, there could be more samples of one label (ie. rows) than another (ie. bench)
+X_train, X_test, y_train, y_test = train_test_split(X , y, test_size=0.25, random_state=42, stratify=y)
+
+fig, ax = plt.subplots(figsize=(10,15))
+df_train["label"].value_counts().plot(
+    kind="bar", ax=ax, color="lightblue", label="Total"
+)
+y_train.value_counts().plot(kind="bar", ax=ax, color="dodgerblue", label="Train")
+y_test.value_counts().plot(kind="bar", ax=ax, color="royalblue", label="Test")
+plt.legend()
+plt.show()
 
 
 # --------------------------------------------------------------
