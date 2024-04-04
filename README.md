@@ -81,6 +81,7 @@ pip install matplotlib
 pip install math
 pip install spicy
 pip install scikit-learn-intelex
+pip install seaborn
 ```
   
 What was should be installed
