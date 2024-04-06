@@ -61,8 +61,10 @@ print("Frequency features:", len(freq_features))
 print("Cluster features:", len(cluster_features))
 
 
-
-
+feature_set_1 = list(set(basic_features))
+feature_set_2 = list(set(basic_features + square_features + pca_features))
+feature_set_3 = list(set(feature_set_2 + time_features))
+feature_set_4 = list(set(feature_set_3 + freq_features))
 
 # --------------------------------------------------------------
 # Perform forward feature selection using simple decision tree
