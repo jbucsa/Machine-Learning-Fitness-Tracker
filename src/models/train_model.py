@@ -223,7 +223,7 @@ classes = class_test_prob_y.columns
 # Define confusion matrix
 cm = confusion_matrix(y_test, class_test_y, labels=classes)
 
-# Copy and Paste Confusion Matrix Code
+# Copy and Paste code to create Confusion Matrix
 # create confusion matrix for cm
 plt.figure(figsize=(10, 10))
 plt.imshow(cm, interpolation="nearest", cmap=plt.cm.Blues)
@@ -247,19 +247,66 @@ plt.xlabel("Predicted label")
 plt.grid(False)
 plt.show()
 
-
-
-
 # --------------------------------------------------------------
 # Select train and test data based on participant
 # --------------------------------------------------------------
 
+participant_df = df.drop(["set", "category"], axis=1)
 
+X_train = participant_df[participant_df["participant"] != "A"].drop("label", axis=1)
+y_train = participant_df[participant_df["participant"] != "A"]["label"]
+
+X_test = participant_df[participant_df["participant"] == "A"].drop("label", axis=1)
+y_test = participant_df[participant_df["participant"] == "A"]["label"]
+
+X_test = X_test.drop(["participant"], axis=1)
+X_train = X_train.drop(["participant"], axis=1)
+
+# Create Bar Chart
+fig, ax = plt.subplots(figsize=(10, 5))
+df_train["label"].value_counts().plot(
+    kind="bar", ax=ax, color="lightblue", label="Total"
+)
+y_train.value_counts().plot(kind="bar", ax=ax, color="dodgerblue", label="Train")
+y_test.value_counts().plot(kind="bar", ax=ax, color="royalblue", label="Test")
+plt.legend()
+plt.show()
 
 # --------------------------------------------------------------
 # Use best model again and evaluate results
 # --------------------------------------------------------------
 
+(class_train_y, class_test_y, class_train_prob_y, class_test_prob_y, ) = learner.random_forest( X_train[feature_set_4], y_train, X_test[feature_set_4], gridsearch=True )
+
+accuracy =  accuracy_score( y_test, class_test_y)
+
+classes = class_test_prob_y.columns
+# Define confusion matrix
+cm = confusion_matrix(y_test, class_test_y, labels=classes)
+
+# Copy and Paste code to create Confusion Matrix
+# create confusion matrix for cm
+plt.figure(figsize=(10, 10))
+plt.imshow(cm, interpolation="nearest", cmap=plt.cm.Blues)
+plt.title("Confusion matrix")
+plt.colorbar()
+tick_marks = np.arange(len(classes))
+plt.xticks(tick_marks, classes, rotation=45)
+plt.yticks(tick_marks, classes)
+
+thresh = cm.max() / 2.0
+for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+    plt.text(
+        j,
+        i,
+        format(cm[i, j]),
+        horizontalalignment="center",
+        color="white" if cm[i, j] > thresh else "black",
+    )
+plt.ylabel("True label")
+plt.xlabel("Predicted label")
+plt.grid(False)
+plt.show()
 
 # --------------------------------------------------------------
 # Try a simpler model with the selected features
