@@ -46,6 +46,23 @@ plt.show()
 # Split feature subsets
 # --------------------------------------------------------------
 
+basic_features = ["acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z"]
+square_features = ["acc_r", "gyr_r"]
+pca_features = ["pca_1", "pca_2", "pca_3"]
+time_features = [ f for f in df_train.columns if "_temp_" in f]
+freq_features = [ f for f in df_train.columns if ("_freq" in f) or ("_pse" in f)]
+cluster_features = ["cluster"]
+
+print("Basic features:", len(basic_features))
+print("Square features", len(square_features))
+print("PCA features:", len(pca_features))
+print("Time features:", len(time_features))
+print("Frequency features:", len(freq_features))
+print("Cluster features:", len(cluster_features))
+
+
+
+
 
 # --------------------------------------------------------------
 # Perform forward feature selection using simple decision tree
