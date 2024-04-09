@@ -158,3 +158,14 @@ rep_df
 # --------------------------------------------------------------
 # Evaluate the results
 # --------------------------------------------------------------
+
+error = mean_absolute_error(rep_df["reps"], rep_df["reps_pred"]).round(2)
+
+# **Corrected line:**
+rep_df.groupby(["label", "category"])[["reps", "reps_pred"]].mean().plot.bar()
+
+
+# Now go back in set up parameters for for each individual "label", "category" for each "exercise".
+# Try planning with the cutoff, order, column and etc. in the LowPassFilter
+
+# Try findings different filters that may work. 
