@@ -35,10 +35,29 @@ df["gyr_r"] = gyr_r
 # Split data
 # --------------------------------------------------------------
 
+# Separate the Dataframes from each other
+bench_df = df[df["label"] == "bench"]
+squat_df = df[df["label"] == "squat"]
+row_df = df[df["label"] == "row"]
+ohp_df = df[df["label"] == "ohp"]
+bench_df = df[df["label"] == "bench"]
+dead_df = df[df["label"] == "dead"]
 
 # --------------------------------------------------------------
 # Visualize data to identify patterns
 # --------------------------------------------------------------
+
+plot_df = bench_df
+
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["acc_x"].plot()
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["acc_y"].plot()
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["acc_z"].plot()
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["acc_r"].plot()
+
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["gyr_x"].plot()
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["gyr_y"].plot()
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["gyr_z"].plot()
+plot_df[plot_df["set"] == plot_df["set"].unique()[0]]["gyr_r"].plot()
 
 
 # --------------------------------------------------------------
