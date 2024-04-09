@@ -231,7 +231,39 @@ Steps within the ```build_features.py``` goes as:
 4. No need to create a ```__init__.py``` file for this folder because we did so in Step 4. 
 
 
+### Step 6: Predictive Modelling
+1.  Import from GitHub code or copy following python files, as there hold functions we will utilized in the following steps.
+   ```/src/models/LearningAlgorithms.py```
+2. Now we will write a python file that will use the data and train model to predict either an exercise is one of 6 exercises we have be analysising thus far. Label this file ```build_features.py```. For this project, the ```train_model.py``` can be found 
+    ```/src/models/train_model.py```
+Steps within the ```train_model.py``` goes as:
+   1. Set Up
+      1. Plot settings
+      2. Import Data Frame
+      3. df = pd.read_pickle("../../data/interim/03_data_features.pkl")
+   2. Create a training and test set
+   3. Split feature subsets
+      1. Basic features
+      2. Square features
+      3. PCA features
+      4. Time features
+      5. Frequency features
+      6. Cluster features
+   4. Perform forward feature selection using simple decision tree
+      1. Use the ```ClassificationAlgorithms()```
+   5. Grid search for best hyperparameters and model selection
+      1. Import Grid search code
+   6. Create a grouped bar plot to compare the results
+   7. Select best model and evaluate results
+      1. Start with one of the Training modesl from ```ClassificationAlgorithms()```
+      2. Define and create confusion matrix
+      3. create confusion matrix for cm
+   8. Select train and test data based on participant
+   9. Use best model again and evaluate results
+   10. Try a simpler model with the selected features
+       1.  Find out which feature set and which model work best together for which exercise based on the results from the confusion matrix.
 
+### Step 7: Counting Repetitions
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url-Bucsa]: https://www.linkedin.com/in/justin-bucsa
