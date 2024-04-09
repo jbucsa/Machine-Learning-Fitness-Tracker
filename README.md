@@ -264,6 +264,23 @@ Steps within the ```train_model.py``` goes as:
        1.  Find out which feature set and which model work best together for which exercise based on the results from the confusion matrix.
 
 ### Step 7: Counting Repetitions
+1. Now we will write a python file. Label this file ```count_repetitions.py```. For this project, the ```count_repetitions.py``` can be found 
+    ```/src/features/count_repetitions.py```
+Steps within the ```count_repetitions.py``` goes as:
+   1. Set Up
+      1. Plot settings
+   2. Load data
+   3. Split data
+   4. Visualize data to identify patterns
+   5. Configure LowPassFilter
+   6. Apply and tweak LowPassFilter
+   7. Create function to count repetitions
+   8. Create benchmark dataframe
+   9. Evaluate the results
+
+
+
+
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url-Bucsa]: https://www.linkedin.com/in/justin-bucsa
